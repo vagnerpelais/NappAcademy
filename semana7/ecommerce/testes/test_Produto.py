@@ -8,7 +8,7 @@ class Testproduto:
 
     def test_instanciar_objeto_somente_ean(self):
         objeto = Produto(ean='12345678911')
-        assert objeto._codigo_ean, '12345678911'
+        assert objeto.ean, '12345678911'
         assert objeto._preco == 0
 
     def test_instanciar_objeto_preco_negativo(self):
@@ -17,7 +17,8 @@ class Testproduto:
         assert str(error.value) == 'Preço negativo'
 
     def test_setters(self):
-        objeto = Produto()
+        objeto = Produto(ean='123')
+        assert objeto.ean == '123'
         assert objeto.preco == 0 # Acessando pelo getter
         objeto.preco = 100 # Alterando o valor pelo setter
         assert objeto.preco == 100

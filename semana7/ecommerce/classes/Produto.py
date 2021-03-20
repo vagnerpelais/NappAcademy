@@ -9,6 +9,12 @@ class Produto:
     def preco(self):
         return self._preco
 
+
+    @property
+    def ean(self):
+        return self._codigo_ean
+
+
     @preco.setter #Setter
     def preco(self, value):
         self._preco = value
