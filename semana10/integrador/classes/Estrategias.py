@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from contextlib import closing
 import sqlite3
 import csv
+import re
 
 
 class Estrategia(ABC):
@@ -40,10 +41,7 @@ class Estrategia_SQLite(Estrategia):
             cursor = conn.cursor()
             cursor.execute("SELECT * FROM vendas;")
             for linha in cursor.fetchall():
-                valor = linha[-2]
-                data = linha[-1]
-                total = (valor, data)
-                lista_registros.append(total)
+                lista_registros.append(linha)
         return lista_registros
 
     def parametros_necessarios(self):
@@ -60,10 +58,7 @@ class Estrategia_CSV(Estrategia):
         with open(arquivo, newline='\n') as csvfile:
             reader = csv.DictReader(csvfile)
             for line in reader:
-                total = line['total']
-                vendido = line['vendido_em']
-                desafio7 = {'total': total, 'vendido_em': vendido}
-                lista_registros.append(desafio7)
+                lista_registros.append(line)
         return lista_registros
 
     def parametros_necessarios(self):
@@ -71,3 +66,54 @@ class Estrategia_CSV(Estrategia):
 
     def nome(self):
         return 'Algoritmo CSV'
+
+
+class Estrategia_Texto1(Estrategia):
+    def execute(self, dados):
+        lista_registros = []
+        arquivo = dados['arquivo']
+        with open(arquivo) as txtfile:
+            lines = txtfile.readlines()
+            for line in lines:
+                if lines.index(line) > 2:
+                    txt_final = line.replace('        ',';').replace('       ',';')
+                    lista_valores = txt_final.split(';')
+                    data = lista_valores[0]
+                    valor = lista_valores[3]
+                    produto = lista_valores[-1].replace('\n', '')
+                    dados = (produto, valor, data)
+                    lista_registros.append(dados)
+
+        return lista_registros
+                   
+    
+    def parametros_necessarios(self):
+        return ('algoritmo', 'arquivo')
+
+    def nome(self):
+        return 'Algoritmo TXT'
+
+
+class Estrategia_Texto2(Estrategia):
+    def execute(self, dados):
+        lista_registros = []
+        arquivo = dados['arquivo']
+        with open(arquivo) as txtfile:
+            lines = txtfile.readlines()
+            for line in lines:
+                if lines.index(line) > 2:
+                    txt_final = line.replace('        ',';').replace('       ',';')
+                    lista_valores = txt_final.split(';')
+                    data = lista_valores[0]
+                    valor = lista_valores[2].replace('\n', '')
+                    produto = lista_valores[1]
+                    dados = (produto, valor, data)
+                    lista_registros.append(dados)
+
+        return lista_registros
+    
+    def parametros_necessarios(self):
+        return ('algoritmo', 'arquivo')
+
+    def nome(self):
+        return 'Algoritmo TXT'
