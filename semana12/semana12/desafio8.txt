@@ -1,0 +1,6 @@
+Pergunta : Você identifica algum código/cenário dentro da Napp em que o padrão de projeto estudado poderia ser
+aplicado para melhora do produto ou redução de manutenção ?
+
+Respostas : Falando do Time do PDI (ETL)
+Exemplo de ERP chamado CPlug se mudava o xpath do botão de login tinhamos que mudar de todas as lojas
+recente houve a criação do napp_pdi aonde trocamos em apenas um python para todas as lojas 
