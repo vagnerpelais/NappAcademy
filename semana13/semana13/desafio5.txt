@@ -1,0 +1,4 @@
+No caso de uma implementação do ERP3, o arquivo de credenciais deveria ter o nome do ERP3, o db deveria apontar para um arquivo de banco sql, o relatório
+poderia ser txt ou csv, não faz diferença.
+Precisaríamos também de dados de acesso ao banco como nome do banco, usuario
+e senha, e também um servidor mysql instalado na máquina.
