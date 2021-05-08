@@ -1,0 +1,1 @@
+Antigamente haviam as classes do PDI, porém atualmente já é utilizado esse método de classes abtratas nas rotinas das lojas.
